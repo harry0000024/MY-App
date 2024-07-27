@@ -60,9 +60,9 @@ refreshToken:{
 
 
 userSchema.pre("save", async function(next){
-if(!this.isModifiend("password")) return next()
+if(!this.isModifiend("password")) return next()   // by this line if user has update any another field then password will not change on saving. 
 
-    this.password = bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10)
     next()
 
     //     if(this.isModified("password")){
@@ -98,7 +98,18 @@ userSchema.methods.generateAccessToken = function(){
 }
 
 userSchema.methods.generateAccessToken = function(){
+    return jwt.sign(
+        //we can return is by  holding in veriable at place of direct return
+        {
+            _id: this._id,
+          
+        },
+        process.env.REFRESH_TOKEN_SECRET,    
     
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+        }
+    )
 }
 
 export const User = mongoose.model("User", userSchema)
