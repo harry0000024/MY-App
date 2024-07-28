@@ -10,7 +10,8 @@ import fs from "fs"     // we have not to install this package it is coming with
     cloudinary.config({ 
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
         api_key: process.env.CLOUDINARY_API_KEY, 
-        api_secret: CLOUDINARY_API_SECRET
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+
         
         // Click 'View Credentials' below to copy your API secret
     });
@@ -35,7 +36,7 @@ return response;
         }
     }
 
-cloudinary.v2.upload
+
     export {uploadOnCloudinary}
 
 

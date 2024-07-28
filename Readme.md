@@ -10,4 +10,4 @@
 
 
 
- ## we installed mongoos-aggrigate-paginate  and becrypt in user and video model
+ ## we installed mongoos-aggrigate-paginate  and bcrypt in user and video model as well as Json web token

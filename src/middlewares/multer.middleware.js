@@ -16,5 +16,5 @@ const storage = multer.diskStorage({
   export const upload = multer({
     
     // storage: storage  // we are using ES6 so we can type only storage
-    storage,
+        storage,
 })
