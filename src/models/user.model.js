@@ -60,7 +60,7 @@ refreshToken:{
 
 
 userSchema.pre("save", async function(next){
-if(!this.isModifiend("password")) return next()   // by this line if user has update any another field then password will not change on saving. 
+if(!this.isModified("password")) return next()   // by this line if user has update any another field then password will not change on saving. 
 
     this.password = await bcrypt.hash(this.password, 10)
     next()

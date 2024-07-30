@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 import {uploadOnCloudinary} from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/APIError.js";
+import mongoose from "mongoose";
 
 
 
@@ -29,7 +31,7 @@ if(
     throw new ApiError(400,"All fiends are required")
 }
 
-const existedUser = User.findOne({
+const existedUser =  await User.findOne({
     $or:[{username},{email}]
 })
 if(existedUser){
@@ -37,7 +39,7 @@ if(existedUser){
 }
 
 //here we  have directy access of file because we are using multer. express already gives access of body
-const avatarLocalPath = req.file?.avatar[0]?.path;
+const avatarLocalPath = req.files?.avatar[0]?.path;
 const coverImageLocalPath = req.files?.coverImage[0]?.path;
 
 if (!avatarLocalPath) {
@@ -62,7 +64,7 @@ const user = await User.create({
 
 })
 
-const createdUser =  await User.findById(User._id).select(
+const createdUser =  await User.findById(user._id).select(
     "-password -refreshToken"
 )
 if (!createdUser) {
