@@ -40,7 +40,13 @@ if(existedUser){
 
 //here we  have directy access of file because we are using multer. express already gives access of body
 const avatarLocalPath = req.files?.avatar[0]?.path;
-const coverImageLocalPath = req.files?.coverImage[0]?.path;
+// const coverImageLocalPath = req.files?.coverImage[0]?.path;
+
+let coverImageLocalPath;
+if (req.files && Array.isArray(req.files.coverImage) &&
+req.files.coverImage.lenght>0) {
+    
+}
 
 if (!avatarLocalPath) {
     throw new ApiError(400,"Avatar file is required")
