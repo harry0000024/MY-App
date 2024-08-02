@@ -1,4 +1,5 @@
 import mongoose, {Schema, Types} from "mongoose";
+
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
@@ -74,7 +75,7 @@ if(!this.isModified("password")) return next()   // by this line if user has upd
 //  here pre is hook
 
 
-userSchema.method.isPasswordCorrect = async function(password){
+userSchema.methods.isPasswordCorrect = async function(password){
    return await bcrypt.compare(password, this.password)
 }
 
@@ -97,7 +98,7 @@ userSchema.methods.generateAccessToken = function(){
 )
 }
 
-userSchema.methods.generateAccessToken = function(){
+userSchema.methods.generateRefreshToken = function(){
     return jwt.sign(
         //we can return is by  holding in veriable at place of direct return
         {
